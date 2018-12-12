@@ -193,4 +193,4 @@ function createRootModel() {
 
 console.log('构建成功,准备打包')
 
-shelljs.exec('node server.js')
+shelljs.exec('node webpack.js')
