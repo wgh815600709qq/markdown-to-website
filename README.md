@@ -29,11 +29,12 @@
 
     2、npm install
     
-    3、将你要生成的markdown文件夹替换resource内部的所有文件夹
+    3、将目标文件夹（markdown格式）替换resource内部的所有文件夹, 注意保留resouce目录.
 
     4、npm run build
 
 ```
+
 ### 演示效果
 
 ![文档](https://github.com/wgh815600709qq/markdown-to-website/blob/master/markdown2.png)
