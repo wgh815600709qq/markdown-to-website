@@ -1,0 +1,31 @@
+#rootPage{
+    display: flex;
+}
+.brumb{
+    flex-basis: 100px;
+    background-color: #ccc;
+    margin-right: 20px;
+}
+.page{
+    flex: 1;
+}
+.son{
+    margin: 10px;
+}
+html, body, #root, #rootPage{
+    height: 100%;
+}
+body{
+    margin: 0;
+}
+.title{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 24px;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+.menu, .item{
+    margin: 10px 0;
+}
