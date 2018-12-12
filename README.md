@@ -4,11 +4,11 @@
 ### 流程
 
 ```
-1、编写、修改原文档, 文档格式markdown;
+  1、编写、修改原文档, 文档格式markdown;
 
-2、脚本转化markdown成可运行的React-Dom;
+  2、脚本转化markdown成可运行的React-Dom;
 
-3、编译、压缩、打包命令, 转场动效;
+  3、编译、压缩、打包命令, 转场动效;
 
 ```
 
@@ -34,3 +34,10 @@
     4、npm run build
 
 ```
+### 演示效果
+
+![文档](https://github.com/wgh815600709qq/markdown-to-website/markdown2.png)
+
+ =>
+ 
+![网站](https://github.com/wgh815600709qq/markdown-to-website/markdown1.png)
