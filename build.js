@@ -8,7 +8,7 @@ var routerArr = []
 /**
  * 遍历：
  * 1、生成目录结构
- * 2、调用react-markdown生成react组件
+ * 2、生成react组件
  */
 
 // 递归遍历文件
