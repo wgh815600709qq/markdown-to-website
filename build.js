@@ -69,56 +69,54 @@ fse.ensureFile(navigarPagePath, (err) => {
         console.log(err);
         return
     }
-    let result = createRootModel();
+    const result = createRootModel(); // 动态首页
     fs.writeFileSync(navigarPagePath, result);
 })
 // 创建React组件单文件
 function createReactModel(fileName, component) {
-    return `
-    import React, {Component} from 'react'
-    export default class ${fileName} extends Component{
-        constructor() {
-            super()
-        }
-
-        render() {
-            return <div className="page"> 
-                ${component}
-            </div>
-        }
+    return `// 动态markdown编译文件
+import React, {Component} from 'react'
+export default class ${fileName} extends Component{
+    constructor() {
+        super()
     }
-    `
+
+    render() {
+        return <div className="page"> 
+            ${component}
+        </div>
+    }
+}`
 }
 
-// 创建根文件
+// 创建动态路由根文件index.js
 function createIndexPage(routerArr) { // name: about, path: 'about/index', unionName: about_1
     let importStr = routerArr.map((item) => {
         return `import ${item.unionName} from '${'./model' + item.path}';`
     }).join('\n')
     let routeStr = routerArr.map((item) => {
-        return `<Route path="${item.path}" component={${item.unionName}}></Route>`
+        return `            <Route path="${item.path}" component={${item.unionName}}></Route>`
     }).join('\n')
-    return `
-    import React from 'react';
-    import ReactDOM from 'react-dom';
-    import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
-    import indexPage from './model/index';
-    ${importStr}
-    import * as serviceWorker from './serviceWorker';
-    ReactDOM.render(
-        <HashRouter>
-            <div id="rootPage">
+    return `// 动态路由文件
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { HashRouter, Route } from 'react-router-dom';
+import indexPage from './model/index';
+${importStr}
+import * as serviceWorker from './serviceWorker';
+ReactDOM.render(
+    <HashRouter>
+        <div id="rootPage">
             <Route path="/" component={indexPage}></Route>
-            ${routeStr}
-            </div>
-        </HashRouter>,
-        document.getElementById('root'));
-    serviceWorker.unregister();
-    `
+${routeStr}
+        </div>
+    </HashRouter>,
+    document.getElementById('root'));
+serviceWorker.unregister();
+`
 }
 
-
-// 制造model根组件
+// 创建model根组件，即首页入口
 function createRootModel() {
     /** true为文件截止
      *  {
@@ -166,31 +164,37 @@ function createRootModel() {
                 </div>`)
             } else { // 文章
                 let new_path = _path + '/' + key
-                arr.push(`<div className="item"><Link to='${new_path}'>${key}</Link></div>`)
+                arr.push(`<div className="item"><Link to='${new_path}'>${key}</Link></div>\n`)
             }
         }
         return arr
     }
     let loopArr = []
-    let loopStr = loop(obj, loopArr, '').join('\n')
-    return `
-    import React, { Component } from 'react'
-    import { Link } from 'react-router-dom';
-    export default class index extends Component {
-        constructor() {
-            super()
-        }
+    let loopStr = loop(obj, loopArr, '').join('\n');
+    return `// 动态首页
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
+export default class index extends Component {
+    constructor() {
+        super()
+    }
 
-        render() {
-            return <div className='brumb'>
-                <div className="title">导航</div>
-                ${loopStr}
-            </div>
-        }
-    }`
+    render() {
+        return <div className='brumb'>
+            <Link className="title" to="/">首页</Link>
+            ${loopStr}
+        </div>
+    }
+}`
 }
 
 
-console.log('构建成功,准备打包')
+console.log('动态编译路由完成，正在进行webpack打包');
 
-shelljs.exec('node webpack.js')
+const args = process.argv.slice(2);
+if (args.includes('--nobuild')) {
+    console.log('无需webpack打包')
+} else {
+    shelljs.exec('nodemon webpack.js')
+}
+

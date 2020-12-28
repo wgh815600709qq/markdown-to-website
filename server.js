@@ -11,3 +11,4 @@ app.get('/', (req, res, next) => {
 app.listen(8111)
 console.log('8111 is on server.')
 opn('http://localhost:8111', { app: 'chrome' });
+// 采用nodemon热更新

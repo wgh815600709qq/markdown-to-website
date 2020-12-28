@@ -1,9 +1,12 @@
 #rootPage{
     display: flex;
 }
+a{
+    text-decoration: none;
+}
 .brumb{
-    flex-basis: 100px;
-    background-color: #ccc;
+    flex-basis: 160px;
+    background-color: #e3e3e3;
     margin-right: 20px;
 }
 .page{
@@ -25,7 +28,23 @@ body{
     line-height: 24px;
     border-bottom: 1px solid #eee;
     padding: 10px;
+    display: block;
 }
 .menu, .item{
     margin: 10px 0;
+    font-weight: 600;
+    margin-left: 4px;
+}
+.menu{
+    font-size: 20px;
+    color: #4346cc;
+}
+.item{
+    font-size: 14px;
+}
+.item a{
+  color: #2386ee;
+}
+a{
+    text-decoration: none;
 }
