@@ -4,8 +4,9 @@
   "description": "文档自动生成网站工具",
   "main": "index.js",
   "scripts": {
-    "build": "node build.js",
-    "compile": "node build.js --nobuild"
+    "dev": "gulp dev",
+    "compile": "node build/compile.js",
+    "debugger-build": "gulp debugger-build"
   },
   "keywords": [
     "auto",
@@ -15,9 +16,14 @@
   "author": "johnson",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.0",
+    "colorful": "^2.1.0",
+    "gulp": "^4.0.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "webpack-dev-middleware": "^3.7.3",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",

@@ -1,18 +1,12 @@
-// 前端项目构建脚本
 const path = require('path');
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const shelljs = require('shelljs');
-const defaultStatsOptions = {
-    colors: 'red',
-    chunks: false,
-    children: false
-}
 const config = {
-    entry: './index.js',
+    mode: "production",
+    entry: path.resolve(__dirname, '../dist/dynamicRouter.js'),
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, '../dist'),
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -61,15 +55,4 @@ const config = {
         new ExtractTextPlugin('style.css')
     ],
 };
-
-webpack(config, (err, stats) => {
-    if (err || stats.hasErrors()) {
-        console.log('打包失败')
-        console.log(err)
-        console.log(stats.hasErrors())
-        console.log(stats.toString(defaultStatsOptions))
-        return
-    }
-    console.log('打包成功')
-    shelljs.exec('node server.js')
-});
+module.exports = config

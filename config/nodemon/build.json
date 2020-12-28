@@ -3,15 +3,16 @@
     "ignore": [
         ".git",
         ".svn",
-        "node_modules/**/node_modules",
-        "dist/bundle.js"
+        "node_modules/",
+        "dist/bundle.js",
+        "build/dynamicRouter.js"
     ],
     "verbose": true,
     "execMap": {
         "js": "node --harmony"
     },
     "watch": [
- 
+        "model/"
     ],
     "env": {
         "NODE_ENV": "development"
