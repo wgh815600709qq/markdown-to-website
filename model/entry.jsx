@@ -1,13 +1,14 @@
 // 动态首页
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Toolbar from '../components/toolbar/index';
 export default class index extends Component {
     constructor() {
         super()
     }
 
     render() {
-        return <div className="rootPage">
+        return <div className="homePage">
         <div className='brumb'>
             <Link className="title" to="/">首页</Link>
             
@@ -40,6 +41,9 @@ export default class index extends Component {
                 </div>
                     </div>
                 </div>
+        </div>
+        <div className="toolbar">
+            <Toolbar/>
         </div>
         </div>
     }

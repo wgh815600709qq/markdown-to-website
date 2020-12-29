@@ -159,15 +159,21 @@ ${loop(obj[key], [], _path + '/' + key).join('\n')}
     return `// 动态首页
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Toolbar from '../components/toolbar/index';
 export default class index extends Component {
     constructor() {
         super()
     }
 
     render() {
-        return <div className='brumb'>
+        return <div className="homePage">
+        <div className='brumb'>
             <Link className="title" to="/">首页</Link>
             ${loopStr}
+        </div>
+        <div className="toolbar">
+            <Toolbar/>
+        </div>
         </div>
     }
 }`

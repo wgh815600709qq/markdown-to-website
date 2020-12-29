@@ -1,7 +1,10 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CSS_NAME = 'css/[name].css';
+const LESS_NAME = '[name]_[local]_[hash:base64:4]';
 const config = {
-    mode: "production",
+    mode: "development",
     entry: path.resolve(__dirname, '../dist/dynamicRouter.js'),
     output: {
         path: path.resolve(__dirname, '../dist'),
@@ -16,30 +19,35 @@ const config = {
             {
                 test: /\.(js|jsx)$/,
                 loaders: 'babel-loader',
-                exclude: path.resolve(__dirname, 'node_modules'),
-                query: {
-                    presets: ['react', 'es2015', "stage-0"]
-                }
-            }, {
+                exclude: path.resolve(__dirname, 'node_modules')
+            },
+            {
                 test: /(\.css|\.less)$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [{
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true,
-                            importLoaders: true,
-                            modules: true,
-                            localIdentName: '[name]_[local]_[hash:base64:4]',
-                            minimize: false
+                            // sourceMap: false,
+                            // importLoaders: true,
+                            // modules: true,
+                            // localIdentName: LESS_NAME,
+                            // minimize: false
                         }
                     },
-                        'postcss-loader',
-                        'less-loader'
-                    ],
-                    publicPath: path.resolve(__dirname, 'dist/css')
-                })
-            }, {
+                    'postcss-loader',
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            modifyVars: {},
+                            javascriptEnabled: true
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.(woff|woff2|eot|ttf)(\?.*$|$)/,
                 use: ['url-loader']
             }, {
@@ -52,7 +60,14 @@ const config = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('style.css')
+        new ExtractTextPlugin({
+            filename: 'css/[name].[contenthash].css',
+            allChunks: true
+        }),
+        new MiniCssExtractPlugin({
+            filename: CSS_NAME,
+            chunkFilename: CSS_NAME
+        })
     ],
 };
 module.exports = config
