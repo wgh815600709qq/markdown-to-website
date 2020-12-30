@@ -13,7 +13,7 @@ gulp.task("compile", gulp.series((done) => {
 }));
 
 gulp.task("build", gulp.series((done) => {
-    shelljs.exec(`node build/build.js`)
+    shelljs.exec(`nodemon build/build.js`)
     done()
 }));
 

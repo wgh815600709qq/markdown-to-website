@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-function unlinkDir(_path) {
-    const files = [];
+function unlinkDir(url) {
+    var files = [];
     if (fs.existsSync(url)) {
         files = fs.readdirSync(url);
         files.forEach(function (file, index) {
@@ -71,7 +71,7 @@ const merge = () => {
                 let name = item;
                 if (fs.existsSync(path.resolve(destPath, item))) {
                     name = `${item}_${new Date().getTime()}`;
-                    fs.renameSync(path.resolve(decompressPath, item), name);
+                    fs.renameSync(path.resolve(decompressPath, item), path.resolve(decompressPath, name));
                     console.log('files1', fs.readdirSync(path.resolve(decompressPath, name)));
                 }
                 console.log('debugger2')
@@ -80,7 +80,8 @@ const merge = () => {
                 let name = item;
                 if (fs.existsSync(path.resolve(destPath, item))) {
                     name = `${item.slice(0, item.length - 2)}${new Date().getTime()}.md`;
-                    fs.renameSync(path.resolve(decompressPath, item), name);
+                    console.log('name', name)
+                    fs.renameSync(path.resolve(decompressPath, item), path.resolve(decompressPath, name));
                     console.log('files2', fs.readdirSync(path.resolve(decompressPath, name)));
                 } else {
                     fs.writeFileSync(path.resolve(destPath, name), fs.readFileSync(path.resolve(decompressPath, name)));

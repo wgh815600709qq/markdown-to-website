@@ -4,15 +4,16 @@
         ".git",
         ".svn",
         "node_modules/",
-        "dist/bundle.js",
-        "build/dynamicRouter.js"
+        "dist/",
+        "build/",
+        "model/"
     ],
     "verbose": true,
     "execMap": {
         "js": "node --harmony"
     },
     "watch": [
-        "model/"
+        "resource/"
     ],
     "env": {
         "NODE_ENV": "development"

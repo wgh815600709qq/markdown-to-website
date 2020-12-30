@@ -13,7 +13,7 @@ const chalk = require('chalk');
 const fs = require('fs');
 const formidable = require('formidable');
 const decompress = require('decompress');
-const { unlinkDir, analysis } = require('./util.js');
+const { unlinkDir, analysis, merge } = require('./util.js');
 
 const devMiddleWare = webpackDevMiddleWare(compiler, {
     publicPath: webpackConfig.output.publicPath
@@ -65,27 +65,26 @@ app.post('/imports', (req, res, next) => {
     form.maxFieldsSize = 20 * 1024 * 1024; // 上传文件的最大大小
     form.parse(req, (err, fields, files) => {
         // console.log('files', files);//针对post请求
-        res.header("Access-Control-Allow-Origin","*");
         // 清空解压文件夹
         console.log('[...]清空解压文件夹');
         unlinkDir(path.resolve(__dirname, './decompress'));
         console.log('[...]准备解压zip文件');
         decompress(path.resolve(files.file.path), path.resolve(__dirname, './decompress')).then(() => {
             console.log('[√]解压完成');
+            console.log('[...]正在删除', path.resolve(files.file.path));
             fs.unlinkSync(path.resolve(files.file.path));
-            console.log('[√]删除压缩包');
+            console.log('[√]删除压缩包完成');
             // 开始分析压缩包
             const analysisResult = analysis(path.resolve(__dirname, './decompress'));
             if (analysisResult) { // 合法
                 // 只需要分析第一级的目录
                 // 存在相同目录(小概率事件)： 重命名
                 // 不存在相同目录： copy到resource
-                res.sendStatus(200);
-                res.send({msg: '数据已上传'})
+                merge();
+                res.send({msg: '数据已上传', code: 200})
             } else {
                 // 不合法
-                res.sendStatus(504);
-                res.send({msg: '压缩包不合法'})
+                res.send({msg: '压缩包不合法', code: 500})
             }
 
         })
