@@ -13,7 +13,7 @@ const chalk = require('chalk');
 const fs = require('fs');
 const formidable = require('formidable');
 const decompress = require('decompress');
-const { unlinkDir, analysis, merge } = require('./util.js');
+const { unlinkDir, analysis, merge, getDirInfo } = require('./util.js');
 
 const devMiddleWare = webpackDevMiddleWare(compiler, {
     publicPath: webpackConfig.output.publicPath
@@ -25,7 +25,6 @@ const resolve = dir => path.join(__dirname, "..", dir);
 app.use(devMiddleWare);
 app.use(hotMiddleWare);
 app.use(express.static('dist'));
-const downloadDir = path.resolve(__dirname, './download')
 app.get('/', (req, res, next) => {
     res.sendFile(path.resolve(__dirname, './dist/index.html'))
 })
@@ -90,6 +89,22 @@ app.post('/imports', (req, res, next) => {
         })
     })
 })
+
+
+// 获取菜单列表
+app.post('/getMenu', (req, res, next) => {
+    const result = getDirInfo(path.resolve(__dirname, '../resource'));
+    res.send({
+        code: 200,
+        data: result
+    })
+});
+
+// 获取菜单详情
+app.post ('/getMenuDetail', (req, res, next) => {
+
+})
+
 
 let inited = false;
 app.listen(8111, () => {

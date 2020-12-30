@@ -100,7 +100,6 @@ const copyDir = (from, to) => {
             const fPath = path.join(from, item);
             const stat = fs.statSync(fPath);
             if (stat.isDirectory()) {
-                console.log('debugger1')
                 copyDir(fPath, path.resolve(to, item));
             } else if (stat.isFile()) {
                 fs.writeFileSync(path.resolve(to, item), fs.readFileSync(path.resolve(from, item)));
@@ -113,5 +112,6 @@ const copyDir = (from, to) => {
 module.exports = {
     unlinkDir: unlinkDir,
     analysis,
-    merge
+    merge,
+    getDirInfo
 }

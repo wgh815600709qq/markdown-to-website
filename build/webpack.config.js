@@ -5,7 +5,7 @@ const CSS_NAME = 'css/[name].css';
 const LESS_NAME = '[name]_[local]_[hash:base64:4]';
 const config = {
     mode: "development",
-    entry: path.resolve(__dirname, '../dist/dynamicRouter.js'),
+    entry: path.resolve(__dirname, '../entry.js'),
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'bundle.js',
