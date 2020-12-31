@@ -13,7 +13,7 @@ const chalk = require('chalk');
 const fs = require('fs');
 const formidable = require('formidable');
 const decompress = require('decompress');
-const { unlinkDir, analysis, merge, getDirInfo } = require('./util.js');
+const { unlinkDir, analysis, merge, anasyResource} = require('./util.js');
 
 const devMiddleWare = webpackDevMiddleWare(compiler, {
     publicPath: webpackConfig.output.publicPath
@@ -93,10 +93,11 @@ app.post('/imports', (req, res, next) => {
 
 // 获取菜单列表
 app.post('/getMenu', (req, res, next) => {
-    const result = getDirInfo(path.resolve(__dirname, '../resource'));
+    const { tree, array } = anasyResource();
     res.send({
         code: 200,
-        data: result
+        data: tree,
+        array: array
     })
 });
 

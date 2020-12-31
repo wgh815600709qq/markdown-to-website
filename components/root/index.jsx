@@ -5,21 +5,22 @@ export default class Root extends Component {
     constructor() {
         super()
         this.state = {
-            menuData: null
+            tree: [],
+            array: []
         }
     }
     render() {
         return <div className="entry">
-            
+            <Menu data={this.state.tree} array={this.state.array}></Menu>
         </div>
     }
 
     componentDidMount() {
         fetch('/getMenu', {method: 'post'}).then(res => {
             return res.json()
-        }).then(data => {
-            console.log('data', data);
-            this.setState({menuData: data});
+        }).then(res => {
+            console.log('data', res);
+            this.setState({tree: res.data, array: res.array});
         })
     }
 }   

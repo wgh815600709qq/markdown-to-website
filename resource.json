@@ -1,0 +1,121 @@
+[
+  {
+    "id": 0,
+    "name": "about",
+    "type": "directory",
+    "children": [
+      {
+        "id": 1,
+        "name": "index.md",
+        "type": "file",
+        "path": "D:\\markdown-to-website\\resource\\about\\index.md"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "index.md",
+    "type": "file",
+    "path": "D:\\markdown-to-website\\resource\\about\\index.md"
+  },
+  {
+    "id": 2,
+    "name": "main",
+    "type": "directory",
+    "children": [
+      {
+        "id": 3,
+        "name": "index.md",
+        "type": "file",
+        "path": "D:\\markdown-to-website\\resource\\main\\index.md"
+      },
+      {
+        "id": 4,
+        "name": "test.md",
+        "type": "file",
+        "path": "D:\\markdown-to-website\\resource\\main\\test.md"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "index.md",
+    "type": "file",
+    "path": "D:\\markdown-to-website\\resource\\main\\index.md"
+  },
+  {
+    "id": 4,
+    "name": "test.md",
+    "type": "file",
+    "path": "D:\\markdown-to-website\\resource\\main\\test.md"
+  },
+  {
+    "id": 5,
+    "name": "mine",
+    "type": "directory",
+    "children": [
+      {
+        "id": 6,
+        "name": "index.md",
+        "type": "file",
+        "path": "D:\\markdown-to-website\\resource\\mine\\index.md"
+      },
+      {
+        "id": 7,
+        "name": "memory",
+        "type": "directory",
+        "children": [
+          {
+            "id": 8,
+            "name": "after18.md",
+            "type": "file",
+            "path": "D:\\markdown-to-website\\resource\\mine\\memory\\after18.md"
+          },
+          {
+            "id": 9,
+            "name": "before18.md",
+            "type": "file",
+            "path": "D:\\markdown-to-website\\resource\\mine\\memory\\before18.md"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "index.md",
+    "type": "file",
+    "path": "D:\\markdown-to-website\\resource\\mine\\index.md"
+  },
+  {
+    "id": 7,
+    "name": "memory",
+    "type": "directory",
+    "children": [
+      {
+        "id": 8,
+        "name": "after18.md",
+        "type": "file",
+        "path": "D:\\markdown-to-website\\resource\\mine\\memory\\after18.md"
+      },
+      {
+        "id": 9,
+        "name": "before18.md",
+        "type": "file",
+        "path": "D:\\markdown-to-website\\resource\\mine\\memory\\before18.md"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "after18.md",
+    "type": "file",
+    "path": "D:\\markdown-to-website\\resource\\mine\\memory\\after18.md"
+  },
+  {
+    "id": 9,
+    "name": "before18.md",
+    "type": "file",
+    "path": "D:\\markdown-to-website\\resource\\mine\\memory\\before18.md"
+  }
+]

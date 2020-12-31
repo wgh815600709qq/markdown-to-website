@@ -31,24 +31,6 @@ body{
     padding: 10px;
     display: block;
 }
-.menu, .item{
-    margin: 10px 0;
-    font-weight: 600;
-    margin-left: 4px;
-}
-.menu{
-    font-size: 20px;
-    color: #4346cc;
-}
-.item{
-    font-size: 14px;
-}
-.item a{
-  color: #2386ee;
-}
-a{
-    text-decoration: none;
-}
 
 .toolbar{
     position: absolute;

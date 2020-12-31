@@ -57,6 +57,57 @@ const getDirInfo = (dirPath) => {
     return results
 }
 
+/**
+ * 动态方法：
+ * 读取资源文件夹，并生成菜单目录结构resource.json
+ {
+    id: 1,
+    name: 'util',
+    children: [],
+    type: 'file/directory',
+    context: ''
+ }
+ */
+const anasyResource = () => {
+    var treeResult = [], arrResult = [], id = 0; // 树形结构， 数组形结构
+    const resourcePath = path.resolve(__dirname, '../resource');
+    const mapDir = (dirPath, parent) => {
+        if (fs.existsSync(dirPath)) {
+            const files = fs.readdirSync(dirPath);
+            files.forEach(file => {
+                const fPath = path.join(dirPath, file);
+                const stat = fs.statSync(fPath);
+                const newId = id++;
+                if (stat.isDirectory()) {
+                    const obj = {
+                        id: newId,
+                        name: file,
+                        type: 'directory',
+                        children: []
+                    }
+                    parent.push(obj);
+                    arrResult.push(obj);
+                    mapDir(fPath, parent[parent.length - 1].children);
+                } else if (stat.isFile()) {
+                    const obj = {
+                        id: newId,
+                        name: file,
+                        type: 'file',
+                        path: fPath // 方便后续读取
+                    }
+                    parent.push(obj);
+                    arrResult.push(obj);
+                }
+            })
+        } else {
+            console.log('文件目录不存在', dirPath)
+        }
+    }
+    mapDir(resourcePath, treeResult);
+    fs.writeFileSync(path.resolve(__dirname, '../resource.json'), JSON.stringify(arrResult, null, 2));
+    return { tree: treeResult, array: arrResult }
+}
+
 // 合并
 const merge = () => {
     const decompressPath = path.resolve(__dirname, './decompress');
@@ -91,7 +142,7 @@ const merge = () => {
         })
     }
 }
-
+// copy会涉及到权限问题
 const copyDir = (from, to) => {
     fs.mkdirSync(to);
     if (fs.existsSync(from)) {
@@ -113,5 +164,6 @@ module.exports = {
     unlinkDir: unlinkDir,
     analysis,
     merge,
-    getDirInfo
+    getDirInfo,
+    anasyResource
 }
